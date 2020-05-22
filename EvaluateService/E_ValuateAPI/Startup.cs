@@ -24,13 +24,10 @@ namespace E_ValuateAPI
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Eval API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E_Valuate API", Version = "v1" });
             });
 
-
-
-            services.AddDbContext<EvalContext>(options =>
-    options.UseSqlServer("Eval"));
+            services.AddDbContext<EvalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Eval")));
 
             services.AddControllers();
         }
@@ -45,7 +42,7 @@ namespace E_ValuateAPI
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eval API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "E_Valuate API V1");
             });
 
             if (env.IsDevelopment())
