@@ -19,6 +19,7 @@ namespace E_ValuateAPI.Entities
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Friends>(entity =>
@@ -30,6 +31,18 @@ namespace E_ValuateAPI.Entities
                 entity.Property(e => e.PostId).HasColumnName("PostID");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.Friends)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Friends_Posts");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.FriendsNavigation)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Friends_Users");
             });
 
             modelBuilder.Entity<Posts>(entity =>
@@ -52,6 +65,12 @@ namespace E_ValuateAPI.Entities
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PostsNavigation)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Posts_Users");
             });
 
             modelBuilder.Entity<Users>(entity =>

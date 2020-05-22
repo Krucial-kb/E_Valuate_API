@@ -5,6 +5,12 @@ namespace E_ValuateAPI.Entities
 {
     public partial class Users
     {
+        public Users()
+        {
+            FriendsNavigation = new HashSet<Friends>();
+            PostsNavigation = new HashSet<Posts>();
+        }
+
         public int UserId { get; set; }
         public string FullName { get; set; }
         public string Username { get; set; }
@@ -16,5 +22,8 @@ namespace E_ValuateAPI.Entities
         public string Platform { get; set; }
         public int? Friends { get; set; }
         public int? Posts { get; set; }
+
+        public virtual ICollection<Friends> FriendsNavigation { get; set; }
+        public virtual ICollection<Posts> PostsNavigation { get; set; }
     }
 }
