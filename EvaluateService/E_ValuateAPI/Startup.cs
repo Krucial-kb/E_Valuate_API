@@ -29,11 +29,8 @@ namespace E_ValuateAPI
 
 
 
-            string whichDb = Configuration["DatabaseConnection"];
-            string connection = Configuration.GetConnectionString(whichDb);
-
             services.AddDbContext<EvalContext>(options =>
-    options.UseSqlServer(connection));
+    options.UseSqlServer("Eval"));
 
             services.AddControllers();
         }
