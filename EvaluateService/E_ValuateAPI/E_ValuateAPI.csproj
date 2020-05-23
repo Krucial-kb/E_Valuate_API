@@ -26,5 +26,7 @@
     <ProjectReference Include="..\DataAccess\E_ValuateDataAccess.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 
 </Project>

@@ -11,48 +11,48 @@ namespace E_ValuateAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class PostsDataController : ControllerBase
     {
         private readonly EvalContext _context;
 
-        public UsersController(EvalContext context)
+        public PostsDataController(EvalContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/PostsData
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<PostsData>>> GetPostsData()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.PostsData.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/PostsData/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(int id)
+        public async Task<ActionResult<PostsData>> GetPostsData(int id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var postsData = await _context.PostsData.FindAsync(id);
 
-            if (users == null)
+            if (postsData == null)
             {
                 return NotFound();
             }
 
-            return users;
+            return postsData;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/PostsData/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, Users users)
+        public async Task<IActionResult> PutPostsData(int id, PostsData postsData)
         {
-            if (id != users.UserId)
+            if (id != postsData.PostId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
+            _context.Entry(postsData).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace E_ValuateAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!PostsDataExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace E_ValuateAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/PostsData
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<PostsData>> PostPostsData(PostsData postsData)
         {
-            _context.Users.Add(users);
+            _context.PostsData.Add(postsData);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsers", new { id = users.UserId }, users);
+            return CreatedAtAction("GetPostsData", new { id = postsData.PostId }, postsData);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/PostsData/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(int id)
+        public async Task<ActionResult<PostsData>> DeletePostsData(int id)
         {
-            var users = await _context.Users.FindAsync(id);
-            if (users == null)
+            var postsData = await _context.PostsData.FindAsync(id);
+            if (postsData == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            _context.PostsData.Remove(postsData);
             await _context.SaveChangesAsync();
 
-            return users;
+            return postsData;
         }
 
-        private bool UsersExists(int id)
+        private bool PostsDataExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _context.PostsData.Any(e => e.PostId == id);
         }
     }
 }

@@ -1,4 +1,4 @@
-using E_ValuateAPI.Entities;
+using E_ValuateAPI.DataModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

@@ -24,4 +24,9 @@
     <ProjectReference Include="..\E_valuateDomain\E_valuateDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

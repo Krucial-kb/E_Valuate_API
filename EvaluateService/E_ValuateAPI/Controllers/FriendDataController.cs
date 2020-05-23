@@ -5,54 +5,54 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using E_ValuateAPI.Entities;
+using E_ValuateAPI.DataModels;
 
 namespace E_ValuateAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FriendsController : ControllerBase
+    public class FriendDataController : ControllerBase
     {
         private readonly EvalContext _context;
 
-        public FriendsController(EvalContext context)
+        public FriendDataController(EvalContext context)
         {
             _context = context;
         }
 
-        // GET: api/Friends
+        // GET: api/FriendData
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Friends>>> GetFriends()
+        public async Task<ActionResult<IEnumerable<FriendData>>> GetFriendData()
         {
-            return await _context.Friends.ToListAsync();
+            return await _context.FriendData.ToListAsync();
         }
 
-        // GET: api/Friends/5
+        // GET: api/FriendData/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Friends>> GetFriends(int id)
+        public async Task<ActionResult<FriendData>> GetFriendData(int id)
         {
-            var friends = await _context.Friends.FindAsync(id);
+            var friendData = await _context.FriendData.FindAsync(id);
 
-            if (friends == null)
+            if (friendData == null)
             {
                 return NotFound();
             }
 
-            return friends;
+            return friendData;
         }
 
-        // PUT: api/Friends/5
+        // PUT: api/FriendData/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFriends(int id, Friends friends)
+        public async Task<IActionResult> PutFriendData(int id, FriendData friendData)
         {
-            if (id != friends.FriendId)
+            if (id != friendData.FriendId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(friends).State = EntityState.Modified;
+            _context.Entry(friendData).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace E_ValuateAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FriendsExists(id))
+                if (!FriendDataExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace E_ValuateAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Friends
+        // POST: api/FriendData
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Friends>> PostFriends(Friends friends)
+        public async Task<ActionResult<FriendData>> PostFriendData(FriendData friendData)
         {
-            _context.Friends.Add(friends);
+            _context.FriendData.Add(friendData);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFriends", new { id = friends.FriendId }, friends);
+            return CreatedAtAction("GetFriendData", new { id = friendData.FriendId }, friendData);
         }
 
-        // DELETE: api/Friends/5
+        // DELETE: api/FriendData/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Friends>> DeleteFriends(int id)
+        public async Task<ActionResult<FriendData>> DeleteFriendData(int id)
         {
-            var friends = await _context.Friends.FindAsync(id);
-            if (friends == null)
+            var friendData = await _context.FriendData.FindAsync(id);
+            if (friendData == null)
             {
                 return NotFound();
             }
 
-            _context.Friends.Remove(friends);
+            _context.FriendData.Remove(friendData);
             await _context.SaveChangesAsync();
 
-            return friends;
+            return friendData;
         }
 
-        private bool FriendsExists(int id)
+        private bool FriendDataExists(int id)
         {
-            return _context.Friends.Any(e => e.FriendId == id);
+            return _context.FriendData.Any(e => e.FriendId == id);
         }
     }
 }
