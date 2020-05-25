@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace E_ValuateAPI.DataModels
+namespace E_ValuateDataAccess.DataModels
 {
     public partial class Users
     {
@@ -13,6 +13,7 @@ namespace E_ValuateAPI.DataModels
         }
 
         public int UserId { get; set; }
+        public int? ProfilePicture { get; set; }
         public string FullName { get; set; }
         public string Username { get; set; }
         public int? Address { get; set; }
@@ -23,6 +24,7 @@ namespace E_ValuateAPI.DataModels
         public string Platform { get; set; }
 
         public virtual Address AddressNavigation { get; set; }
+        public virtual PictureData ProfilePictureNavigation { get; set; }
         public virtual ICollection<FriendData> FriendData { get; set; }
         public virtual ICollection<FriendsDetails> FriendsDetails { get; set; }
         public virtual ICollection<PostsDetails> PostsDetails { get; set; }

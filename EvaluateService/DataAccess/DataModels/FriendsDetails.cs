@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace E_ValuateAPI.DataModels
+namespace E_ValuateDataAccess.DataModels
 {
     public partial class FriendsDetails
     {

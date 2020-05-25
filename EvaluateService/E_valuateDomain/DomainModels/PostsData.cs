@@ -5,7 +5,7 @@ using System.Text;
 
 namespace E_valuateDomain.DomainModels
 {
-    public class Posts
+    public class PostsData
     {
         public int PostID { get; set; }
         public int UserID { get; set; }

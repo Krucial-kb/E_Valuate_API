@@ -1,4 +1,4 @@
-using E_ValuateAPI.DataModels;
+using E_ValuateDataAccess.DataModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 
-namespace E_ValuateAPI
+namespace E_ValuateDataAccess
 {
     public class Startup
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace E_ValuateAPI.DataModels
+namespace E_ValuateDataAccess.DataModels
 {
     public partial class EvalContext : DbContext
     {
@@ -18,18 +18,11 @@ namespace E_ValuateAPI.DataModels
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<FriendData> FriendData { get; set; }
         public virtual DbSet<FriendsDetails> FriendsDetails { get; set; }
+        public virtual DbSet<PictureData> PictureData { get; set; }
         public virtual DbSet<PostsData> PostsData { get; set; }
         public virtual DbSet<PostsDetails> PostsDetails { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost\\MSSQLSERVER01;Database=Eval;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -98,6 +91,25 @@ namespace E_ValuateAPI.DataModels
                     .HasConstraintName("FK_FriendsDetails_Users");
             });
 
+            modelBuilder.Entity<PictureData>(entity =>
+            {
+                entity.HasKey(e => e.PictureId);
+
+                entity.Property(e => e.PictureId).HasColumnName("PictureID");
+
+                entity.Property(e => e.ImgDate)
+                    .HasColumnName("imgDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ImgName)
+                    .HasColumnName("imgName")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImgSource)
+                    .IsRequired()
+                    .HasColumnName("imgSource");
+            });
+
             modelBuilder.Entity<PostsData>(entity =>
             {
                 entity.HasKey(e => e.PostId);
@@ -106,9 +118,7 @@ namespace E_ValuateAPI.DataModels
 
                 entity.Property(e => e.Comment).IsUnicode(false);
 
-                entity.Property(e => e.Media)
-                    .IsRequired()
-                    .HasColumnType("image");
+                entity.Property(e => e.Media).IsRequired();
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -180,6 +190,11 @@ namespace E_ValuateAPI.DataModels
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.Address)
                     .HasConstraintName("FK_Users_Address");
+
+                entity.HasOne(d => d.ProfilePictureNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.ProfilePicture)
+                    .HasConstraintName("FK_Users_PictureData");
             });
 
             OnModelCreatingPartial(modelBuilder);
