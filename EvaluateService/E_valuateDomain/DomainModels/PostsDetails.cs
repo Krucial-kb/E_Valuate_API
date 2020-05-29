@@ -10,7 +10,7 @@ namespace E_valuateDomain.DomainModels
         public int UserID { get; set; }
         public int PostID { get; set; }
         public int? Quantity { get; set; }
-        public DateTime? PostDate { get; set; }
+        public DateTime? PostDate { get; set; } = DateTime.Now;
 
     }
 }

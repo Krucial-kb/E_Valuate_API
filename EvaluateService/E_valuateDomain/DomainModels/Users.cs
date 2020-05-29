@@ -20,7 +20,7 @@ namespace E_valuateDomain.DomainModels
         public string Password { get; set; }
         public DateTime DOB { get; set; }
         public string Platform { get; set; }
-
+        public Address AddressNavigation { get; set; }
         public List<FriendsDetails> ListFriendsDetails { get; set; }
         public List<FriendData> listFriendsData { get; set; } = new List<FriendData>();
         public List<PostsDetails> listPosDetails { get; set; } = new List<PostsDetails>();

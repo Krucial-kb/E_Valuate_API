@@ -8,10 +8,10 @@ namespace E_valuateDomain.DomainModels
     public class PostsData
     {
         public int PostID { get; set; }
-        public int UserID { get; set; }
         public string Title { get; set; }
         public byte[] Media { get; set; }
         public string Comment { get; set; }
+        public double? Rating { get; set; }
 
         public Users Users { get; set; }
     }

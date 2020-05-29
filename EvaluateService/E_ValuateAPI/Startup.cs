@@ -1,4 +1,5 @@
 using E_ValuateDataAccess.DataModels;
+using E_valuateDomain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,12 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using E_ValuateDataAccess.Repositories;
 
 
 namespace E_ValuateDataAccess
 {
     public class Startup
     {
+        private const string CorsPolicyName = "AllowConfiguredOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,10 +30,23 @@ namespace E_ValuateDataAccess
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E_Valuate API", Version = "v1" });
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicyName, builder =>
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+                //.AllowCredentials());
+            });
+
             services.AddDbContext<EvalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Eval")));
 
             services.AddControllers();
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

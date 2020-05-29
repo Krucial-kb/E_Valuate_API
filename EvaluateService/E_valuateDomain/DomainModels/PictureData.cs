@@ -9,6 +9,6 @@ namespace E_valuateDomain.DomainModels
         public int PictureID { get; set; }
         public string imageName { get; set; }
         public byte[] imageSource { get; set; }
-        public DateTime? imageDate { get; set; }
+        public DateTime? imageDate { get; set; } = DateTime.Now;
     }
 }

@@ -29,11 +29,10 @@ namespace E_ValuateDataAccess.Logic
             };
         }
 
-        public static E_ValuateDataAccess.DataModels.Address MapAddress(E_valuateDomain.DomainModels.Address address)
+        public static E_ValuateDataAccess.DataModels.Address MapAddress(E_valuateDomain.DomainModels.Users address)
         {
             return new E_ValuateDataAccess.DataModels.Address
             {
-                AddressId = address.AddressID,
                 Street = address.Street,
                 City = address.City,
                 Zip = address.Zip,
@@ -45,7 +44,11 @@ namespace E_ValuateDataAccess.Logic
         {
             return new E_ValuateDataAccess.DataModels.PostsData
             {
-
+                PostId = postsData.PostID,
+                Title = postsData.Title,
+                Media = postsData.Media,
+                Comment = postsData.Comment,
+                Rating = postsData.Rating
             };
         }
 
@@ -53,7 +56,11 @@ namespace E_ValuateDataAccess.Logic
         {
             return new E_ValuateDataAccess.DataModels.PostsDetails
             {
-
+                DetailsId = postsDetails.DetailsID,
+                UserId = postsDetails.UserID,
+                PostId = postsDetails.PostID,
+                Quantity = postsDetails.Quantity,
+                PostDate = postsDetails.PostDate
             };
         }
 
@@ -62,7 +69,7 @@ namespace E_ValuateDataAccess.Logic
             return new E_ValuateDataAccess.DataModels.FriendData
             {
                 FriendId = friendsData.FriendID,
-
+                FriendInfo = friendsData.FriendInfo
             };
         }
 
@@ -70,7 +77,11 @@ namespace E_ValuateDataAccess.Logic
         {
             return new E_ValuateDataAccess.DataModels.FriendsDetails
             {
-
+                DetailsId = friendsDetails.DetailsID,
+                FriendId = friendsDetails.FriendID,
+                UserId = friendsDetails.UserID,
+                Quantity = friendsDetails.Quantity,
+                DateAdded = friendsDetails.DateAdded
             };
         }
 
@@ -121,7 +132,6 @@ namespace E_ValuateDataAccess.Logic
         {
             return new E_valuateDomain.DomainModels.Address
             {
-                AddressID = address.AddressId,
                 Street = address.Street,
                 City = address.City,
                 State = address.State,
@@ -157,7 +167,7 @@ namespace E_ValuateDataAccess.Logic
             return new E_valuateDomain.DomainModels.FriendData
             {
                 FriendID = friendsData.FriendId,
-
+                FriendInfo = friendsData.FriendInfo
             };
         }
 

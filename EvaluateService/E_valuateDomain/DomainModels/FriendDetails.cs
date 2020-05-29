@@ -10,7 +10,7 @@ namespace E_valuateDomain.DomainModels
         public int UserID { get; set; }
         public int FriendID { get; set; }
         public int? Quantity { get; set; }
-        public DateTime? DateAdded { get; set; }
+        public DateTime? DateAdded { get; set; } = DateTime.Now;
 
     }
 }
